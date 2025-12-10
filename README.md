@@ -61,13 +61,17 @@ Frontend runs at **[http://localhost:4200](http://localhost:4200)**
 ## 📘 API Overview
 
 **POST /posts** — Create blog post
+
 **GET /posts** — Get all posts
+
 **GET /posts/:id** — Get a single post
+
 **PUT /posts/:id** — Update a post
+
 **DELETE /posts/:id** — Remove a post
+
 **GET /posts?term=...** — Search posts
 
-Full API contract is documented in `docs/api-contract.md`.
 
 ---
 
