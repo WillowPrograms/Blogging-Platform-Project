@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+nav a.active {
+  background-color: white;
+  color: var(--text-dark);
+  box-shadow: 0 4px 8px rgba(107, 76, 122, 0.3);
+  border-color: white;
+}
