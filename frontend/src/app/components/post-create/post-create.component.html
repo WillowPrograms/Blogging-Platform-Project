@@ -1,1 +1,8 @@
-<p>post-create-component works!</p>
+<h2>Create New Post</h2>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <input formControlName="title" placeholder="Title" required>
+  <textarea formControlName="content" placeholder="Content" required></textarea>
+  <input formControlName="category" placeholder="Category" required>
+  <input formControlName="tags" placeholder="Tags (comma separated)">
+  <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+</form>
