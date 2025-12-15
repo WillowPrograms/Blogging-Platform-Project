@@ -1,1 +1,12 @@
-<p>post-edit-component works!</p>
+<h2>Edit Post</h2>
+@if (post) {
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <input formControlName="title" placeholder="Title" required>
+  <textarea formControlName="content" placeholder="Content" required></textarea>
+  <input formControlName="category" placeholder="Category" required>
+  <input formControlName="tags" placeholder="Tags (comma separated)">
+  <button type="submit" [disabled]="postForm.invalid">Update Post</button>
+</form>
+} @else {
+  <div>Post Not Found.</div>
+}
