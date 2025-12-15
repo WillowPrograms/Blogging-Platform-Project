@@ -1,1 +1,11 @@
-<p>post-list-component works!</p>
+<h2>All Posts</h2>
+<input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search posts..." />
+<ul>
+  @for (post of posts; track $index) {
+    <li>
+      <a [routerLink]="['/posts', post.id]">{{ post.title }}</a> - {{post.category}}
+      <a [routerLink]="['/posts', post.id, 'edit']">Edit</a>
+      <button (click)="deletePost(post.id)">Delete</button>
+    </li>
+  }
+</ul>
