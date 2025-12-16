@@ -1,13 +1,42 @@
-@if (post) {
-<div>
-  <h2>{{ post.title }}</h2>
-  <p>Category: {{ post.category }}</p>
-  <p>Tags: {{ post.tags.join(', ') }}</p>
-  <p>{{ post.content }}</p>
-  <p>Created: {{ post.createdAt | date }}</p>
-  <p>Last Updated: {{ post.updatedAt | date }}</p>
-  <button routerLink="/posts">Back to Posts</button>
+<div class="detail-container">
+  @if (post) {
+    <div class="post-card">
+      <div class="post-header">
+        <h2>{{ post.title }}</h2>
+        <div class="post-meta">
+          <span class="post-category">📚 {{ post.category }}</span>
+          <span class="post-date">📅 {{ post.createdAt | date: 'short' }}</span>
+        </div>
+      </div>
+      
+      <div class="post-content">{{ post.content }}</div>
+      
+      @if (post.tags && post.tags.length > 0) {
+        <div class="post-tags" style="margin-bottom: var(--spacing-md);">
+          <p style="font-weight: 600; margin-bottom: var(--spacing-xs);">🏷️ Tags:</p>
+          <p style="color: var(--text-light);">{{ post.tags.join(', ') }}</p>
+        </div>
+      }
+      
+      @if (post.updatedAt) {
+        <div class="post-timestamps" style="font-size: 0.9rem; color: var(--text-light); margin-bottom: var(--spacing-lg);">
+          <p style="margin: 0;">Updated: {{ post.updatedAt | date: 'short' }}</p>
+        </div>
+      }
+      
+      <div class="post-actions">
+        <button routerLink="/posts" class="btn-back">← Back to Posts</button>
+        <a [routerLink]="['/posts', post.id, 'edit']" class="btn-edit">✏️ Edit Post</a>
+        <button (click)="deletePost()" class="btn-delete">🗑️ Delete Post</button>
+      </div>
+    </div>
+  } @else if (!post) {
+    <div class="no-post">
+      <p>😢 Post Not Found</p>
+    </div>
+  } @else {
+    <div class="loading">
+      <p>⏳ Loading...</p>
+    </div>
+  }
 </div>
-} @else if (!post) {
-  <div>Post Not Found</div>
-}

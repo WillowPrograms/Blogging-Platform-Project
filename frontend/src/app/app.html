@@ -1,10 +1,11 @@
 <header class="header">
-  <h1>Blogging Platform</h1>
+  <h1><a routerLink="/posts" class="logo">🎀 Blogging Platform 🎀</a></h1>
   <nav>
-    <a routerLink="/posts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All Posts</a>
-    <a routerLink="/posts/create" routerLinkActive="active">Create Post</a>
+    <a routerLink="/posts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">📖 All Posts</a>
+    <a routerLink="/posts/create" routerLinkActive="active">✨ Create Post</a>
   </nav>
 </header>
-<main>
+
+<main class="main-content">
   <router-outlet></router-outlet>
 </main>

@@ -13,6 +13,7 @@ import { MockPostService } from '../../services/mock-post.service';
 })
 export class PostDetailComponent implements OnInit {
   post: Post | undefined;
+  private postId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,7 +22,15 @@ export class PostDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const postId = +this.route.snapshot.paramMap.get('id')!;
-    this.postService.getPost(postId).subscribe(post => this.post = post);
+    this.postId = +this.route.snapshot.paramMap.get('id')!;
+    this.postService.getPost(this.postId).subscribe(post => this.post = post);
+  }
+
+  deletePost(): void {
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.postService.deletePost(this.postId).subscribe(() => {
+        this.router.navigate(['/posts']);
+      });
+    }
   }
 }

@@ -1,4 +1,228 @@
+/* Post List Styles */
+
+.post-list-container {
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.post-list-header {
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-list-header h2 {
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+}
+
+/* Search Bar */
+.search-container {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--primary-pink);
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--text-dark);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 0 4px rgba(213, 179, 232, 0.2), var(--shadow-md);
+  transform: scale(1.02);
+}
+
+/* Posts List */
 ul {
   list-style: none;
   padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+li {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  border-left: 4px solid var(--primary-pink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+li:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-left-color: var(--primary-purple);
+}
+
+/* Post Title & Category */
+.post-info {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.post-info a {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-pink);
+  transition: var(--transition-fast);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.post-info a:hover {
+  color: var(--dark-purple);
+  text-decoration: underline;
+}
+
+.post-category {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-mint) 0%, var(--light-purple) 100%);
+  color: var(--text-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Action Buttons */
+.post-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.post-actions a,
+.post-actions button {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.post-actions a {
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-actions a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  text-decoration: none;
+}
+
+.post-actions button {
+  background: linear-gradient(135deg, #FF9FB8 0%, #FF7BA3 100%);
+  color: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.post-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.post-actions button:active {
+  transform: scale(0.95);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-top: var(--spacing-lg);
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  ul {
+    gap: var(--spacing-sm);
+  }
+  
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-md);
+  }
+  
+  .post-actions {
+    width: 100%;
+  }
+  
+  .post-actions a,
+  .post-actions button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .post-list-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  li {
+    padding: var(--spacing-sm);
+  }
+  
+  .post-info a {
+    font-size: 1rem;
+  }
+  
+  .post-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  .post-actions a,
+  .post-actions button {
+    width: 100%;
+    padding: var(--spacing-sm);
+  }
+  
+  .post-list-header h2 {
+    font-size: 1.25rem;
+  }
 }

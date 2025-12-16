@@ -1,11 +1,35 @@
-<h2>All Posts</h2>
-<input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search posts..." />
-<ul>
-  @for (post of posts; track $index) {
-    <li>
-      <a [routerLink]="['/posts', post.id]">{{ post.title }}</a> - {{post.category}}
-      <a [routerLink]="['/posts', post.id, 'edit']">Edit</a>
-      <button (click)="deletePost(post.id)">Delete</button>
-    </li>
+<div class="post-list-container">
+  <div class="post-list-header">
+    <h2>✨ All Posts ✨</h2>
+  </div>
+  
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-input"
+      [(ngModel)]="searchTerm" 
+      (input)="onSearch()" 
+      placeholder="🔍 Search posts..." />
+  </div>
+  
+  @if (posts.length > 0) {
+    <ul>
+      @for (post of posts; track $index) {
+        <li>
+          <div class="post-info">
+            <a [routerLink]="['/posts', post.id]">{{ post.title }}</a>
+            <span class="post-category">📚 {{ post.category }}</span>
+          </div>
+          <div class="post-actions">
+            <a [routerLink]="['/posts', post.id, 'edit']" class="btn-edit">✏️ Edit</a>
+            <button (click)="deletePost(post.id)" class="btn-delete">🗑️ Delete</button>
+          </div>
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="empty-state">
+      <p>💭 No posts found. Create your first amazing post! ✨</p>
+    </div>
   }
-</ul>
+</div>
