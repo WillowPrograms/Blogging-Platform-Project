@@ -1,0 +1,59 @@
+<div class="edit-container">
+  <div class="edit-header">
+    <h2>✏️ Edit Your Post ✏️</h2>
+    <p>Update your amazing content!</p>
+  </div>
+  
+  @if (post) {
+    <div class="form-card">
+      <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Post Title <span class="required">*</span></label>
+          <input 
+            id="title"
+            type="text"
+            formControlName="title" 
+            placeholder="Give your post a catchy title..." 
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="content">Content <span class="required">*</span></label>
+          <textarea 
+            id="content"
+            formControlName="content" 
+            placeholder="Write your amazing content here..." 
+            required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Category <span class="required">*</span></label>
+          <input 
+            id="category"
+            type="text"
+            formControlName="category" 
+            placeholder="e.g., Technology, Design, Lifestyle..." 
+            required>
+        </div>
+        
+        <div class="form-group">
+          <label for="tags">Tags</label>
+          <input 
+            id="tags"
+            type="text"
+            formControlName="tags" 
+            placeholder="Add tags separated by commas (optional)">
+        </div>
+        
+        <div class="form-buttons">
+          <button type="submit" class="btn-submit" [disabled]="postForm.invalid">💾 Update Post</button>
+          <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  } @else {
+    <div class="no-post">
+      <p>😢 Post Not Found</p>
+    </div>
+  }
+</div>

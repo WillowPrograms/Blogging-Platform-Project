@@ -1,0 +1,126 @@
+.toast-container {
+  position: fixed;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  max-width: 400px;
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  box-shadow: var(--shadow-lg);
+  animation: slideInRight 0.3s ease-out forwards;
+  pointer-events: auto;
+  border-left: 5px solid;
+  word-break: break-word;
+}
+
+.toast.toast-success {
+  border-left-color: #4CAF50;
+}
+
+.toast.toast-success .toast-icon {
+  color: #4CAF50;
+}
+
+.toast.toast-error {
+  border-left-color: #F44336;
+}
+
+.toast.toast-error .toast-icon {
+  color: #F44336;
+}
+
+.toast.toast-info {
+  border-left-color: var(--primary-blue, #2196F3);
+}
+
+.toast.toast-info .toast-icon {
+  color: var(--primary-blue, #2196F3);
+}
+
+.toast-icon {
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  flex: 1;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toast-close:hover {
+  color: var(--text-dark);
+  transform: scale(1.1);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+}
+
+.toast.removing {
+  animation: slideOutRight 0.3s ease-in forwards;
+}
+
+@media (max-width: 768px) {
+  .toast-container {
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    left: var(--spacing-md);
+    max-width: none;
+  }
+
+  .toast {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .toast-message {
+    font-size: 0.9rem;
+  }
+}

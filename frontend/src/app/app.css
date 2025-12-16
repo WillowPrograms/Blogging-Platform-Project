@@ -1,0 +1,134 @@
+/* App Header & Navigation */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 100%);
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.header h1 {
+  color: var(--white);
+  font-size: 2rem;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+}
+
+.header h1 .logo {
+  color: var(--white);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-block;
+}
+
+.header h1 .logo:hover {
+  text-decoration: none;
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+nav {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+nav a {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  font-weight: 600;
+  transition: var(--transition);
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+nav a.active {
+  background-color: var(--white);
+  color: var(--primary-pink);
+  box-shadow: var(--shadow-md);
+  border-color: var(--white);
+  font-weight: 700;
+}
+
+/* Main Content Area */
+.main-content {
+  padding: var(--spacing-lg);
+  animation: fadeIn 0.5s ease-out;
+  min-height: calc(100vh - 100px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  nav {
+    width: 100%;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+  
+  nav a {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+  
+  .main-content {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .header h1 {
+    font-size: 1.25rem;
+  }
+  
+  nav {
+    gap: var(--spacing-xs);
+  }
+  
+  nav a {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.85rem;
+    flex: 1;
+    text-align: center;
+  }
+  
+  .main-content {
+    padding: var(--spacing-sm);
+  }
+}
