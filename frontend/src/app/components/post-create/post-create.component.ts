@@ -40,4 +40,8 @@ export class PostCreateComponent {
       });
     }
   }
+
+  onCancel(): void {
+    this.router.navigate(['/posts']);
+  }
 }
