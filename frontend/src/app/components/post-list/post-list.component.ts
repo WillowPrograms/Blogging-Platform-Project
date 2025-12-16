@@ -5,17 +5,20 @@ import { ToastService } from '../../services/toast.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from "@angular/router";
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, ConfirmModalComponent],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css',
 })
 export class PostListComponent implements OnInit {
   posts: Post[] = [];
   searchTerm: string = '';
+  isConfirmModalOpen: boolean = false;
+  postToDelete: number | null = null;
 
   constructor(
     private postService: MockPostService,
@@ -41,8 +44,13 @@ export class PostListComponent implements OnInit {
   }
 
   deletePost(id: number) {
-    if (confirm('Are you sure you want to delete this post?')) {
-      this.postService.deletePost(id).subscribe({
+    this.postToDelete = id;
+    this.isConfirmModalOpen = true;
+  }
+
+  onConfirmDelete() {
+    if (this.postToDelete !== null) {
+      this.postService.deletePost(this.postToDelete).subscribe({
         next: (success) => {
           if (success) {
             this.toastService.success('Post deleted successfully!');
@@ -55,5 +63,12 @@ export class PostListComponent implements OnInit {
         },
       });
     }
+    this.isConfirmModalOpen = false;
+    this.postToDelete = null;
+  }
+
+  onCancelDelete() {
+    this.isConfirmModalOpen = false;
+    this.postToDelete = null;
   }
 }

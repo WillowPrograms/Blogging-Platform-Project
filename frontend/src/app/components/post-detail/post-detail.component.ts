@@ -4,17 +4,19 @@ import { Post } from '../../models/post.model';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MockPostService } from '../../services/mock-post.service';
 import { ToastService } from '../../services/toast.service';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, ConfirmModalComponent],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.css',
 })
 export class PostDetailComponent implements OnInit {
   post: Post | undefined;
   private postId: number = 0;
+  isConfirmModalOpen: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,17 +37,23 @@ export class PostDetailComponent implements OnInit {
   }
 
   deletePost(): void {
-    if (confirm('Are you sure you want to delete this post?')) {
-      this.postService.deletePost(this.postId).subscribe({
-        next: () => {
-          this.toastService.success('Post deleted successfully!');
-          this.router.navigate(['/posts']);
-        },
-        error: (err) => {
-          console.error('Error deleting post:', err);
-          this.toastService.error('Failed to delete post.');
-        },
-      });
-    }
+    this.isConfirmModalOpen = true;
+  }
+
+  onConfirmDelete() {
+    this.postService.deletePost(this.postId).subscribe({
+      next: () => {
+        this.toastService.success('Post deleted successfully!');
+        this.router.navigate(['/posts']);
+      },
+      error: (err) => {
+        console.error('Error deleting post:', err);
+        this.toastService.error('Failed to delete post.');
+      },
+    });
+  }
+
+  onCancelDelete() {
+    this.isConfirmModalOpen = false;
   }
 }
