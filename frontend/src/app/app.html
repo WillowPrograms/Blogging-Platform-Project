@@ -1,11 +1,15 @@
-<header class="header">
-  <h1><a routerLink="/posts" class="logo">🎀 Blogging Platform 🎀</a></h1>
+<div class="header">
+  <h1><a class="logo" routerLink="/">📝 Blogging Platform</a></h1>
   <nav>
-    <a routerLink="/posts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">📖 All Posts</a>
-    <a routerLink="/posts/create" routerLinkActive="active">✨ Create Post</a>
+    <a routerLink="/posts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All Posts</a>
+    <a routerLink="/posts/create" routerLinkActive="active">Create Post</a>
   </nav>
-</header>
+</div>
+
+<app-toast></app-toast>
 
 <main class="main-content">
-  <router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </main>

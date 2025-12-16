@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MockPostService } from '../../services/mock-post.service';
+import { ToastService } from '../../services/toast.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +18,7 @@ export class PostCreateComponent {
   constructor(
     private fb: FormBuilder,
     private postService: MockPostService,
+    private toastService: ToastService,
     private router: Router
   ) {
     this.postForm = this.fb.group({
@@ -35,8 +37,14 @@ export class PostCreateComponent {
         tags: formValue.tags ? formValue.tags.split(',').map((tag: string) => tag.trim()) : [],
       };
       this.postService.createPost(post).subscribe({
-        next: () => this.router.navigate(['/posts']),
-        error: (err) => console.error('Error creating post:', err),
+        next: () => {
+          this.toastService.success('Post created successfully! 🎉');
+          this.router.navigate(['/posts']);
+        },
+        error: (err) => {
+          console.error('Error creating post:', err);
+          this.toastService.error('Failed to create post. Please try again.');
+        },
       });
     }
   }

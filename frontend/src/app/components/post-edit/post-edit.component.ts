@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Post } from '../../models/post.model';
 import { MockPostService } from '../../services/mock-post.service';
+import { ToastService } from '../../services/toast.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -20,6 +21,7 @@ export class PostEditComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private postService: MockPostService,
+    private toastService: ToastService,
     private router: Router
   ) {
     this.postForm = this.fb.group({
@@ -32,14 +34,20 @@ export class PostEditComponent implements OnInit {
 
   ngOnInit(): void {
     const postId = +this.route.snapshot.paramMap.get('id')!;
-    this.postService.getPost(postId).subscribe((post) => {
-      this.post = post;
-      if (post) {
-        this.postForm.patchValue({
-          ...post,
-          tags: post.tags.join(', '),
-        });
-      }
+    this.postService.getPost(postId).subscribe({
+      next: (post) => {
+        this.post = post;
+        if (post) {
+          this.postForm.patchValue({
+            ...post,
+            tags: post.tags.join(', '),
+          });
+        }
+      },
+      error: (err) => {
+        console.error('Error loading post:', err);
+        this.toastService.error('Failed to load post.');
+      },
     });
   }
 
@@ -50,10 +58,17 @@ export class PostEditComponent implements OnInit {
         ...formValue,
         tags: formValue.tags.split(',').map((tag: string) => tag.trim()),
       }
-      this.postService.updatePost(this.post.id, updatedPost).subscribe((updated) => {
-        if (updated) {
-          this.router.navigate(['/posts']);
-        }
+      this.postService.updatePost(this.post.id, updatedPost).subscribe({
+        next: (updated) => {
+          if (updated) {
+            this.toastService.success('Post updated successfully! ✨');
+            this.router.navigate(['/posts']);
+          }
+        },
+        error: (err) => {
+          console.error('Error updating post:', err);
+          this.toastService.error('Failed to update post. Please try again.');
+        },
       });
     }
   }
