@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Post } from '../models/post.model';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
-  private apiUrl = 'http://localhost:5000'; // This is the URL for the Flask (python) API 
+  private apiUrl = environment.apiUrl; // URL from environment configuration 
 
   constructor(private http: HttpClient) {}
 
