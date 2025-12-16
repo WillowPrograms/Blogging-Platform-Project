@@ -47,7 +47,7 @@
         
         <div class="form-buttons">
           <button type="submit" class="btn-submit" [disabled]="postForm.invalid">💾 Update Post</button>
-          <button routerLink="/posts" class="btn-cancel">Cancel</button>
+          <button type="button" class="btn-cancel" (click)="onCancel()">Cancel</button>
         </div>
       </form>
     </div>

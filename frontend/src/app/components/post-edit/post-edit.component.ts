@@ -72,4 +72,8 @@ export class PostEditComponent implements OnInit {
       });
     }
   }
+
+  onCancel(): void {
+    this.router.navigate(['/posts']);
+  }
 }
