@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:5000
+@json = application/json
+
+### Check API status
+GET {{baseUrl}}/health
+
+### Create post
+POST {{baseUrl}}/posts
+Content-Type: {{json}}
+
+{
+  "title": "My First Blog Post",
+  "content": "This is the content of my first blog post.",
+  "category": "Technology",
+  "tags": ["Tech", "Programming"]
+}
+
+### Get all posts
+GET {{baseUrl}}/posts
+
+### Filter posts by term
+GET {{baseUrl}}/posts?term=tech
+
+### Get a single post (change id)
+GET {{baseUrl}}/posts/1
+
+### Update post (PUT)
+PUT {{baseUrl}}/posts/1
+Content-Type: {{json}}
+
+{
+  "title": "My Updated Blog Post",
+  "content": "This is the updated content of my first blog post.",
+  "category": "Technology",
+  "tags": ["Tech", "Programming"]
+}
+
+### Delete post
+DELETE {{baseUrl}}/posts/1
