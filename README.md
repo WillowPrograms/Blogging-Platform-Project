@@ -45,6 +45,26 @@ Backend runs at **[http://localhost:5000](http://localhost:5000)**
 
 ---
 
+## 🧪 Testing the API with `blog-api.http`
+
+This repo includes a ready-to-run HTTP scratch file at:
+
+- `blog-api.http` (project root)
+
+### VS Code (REST Client extension)
+1. Install the extension: **REST Client** (publisher: Huachao Mao).
+2. Start the backend (`python run.py`).
+3. Open `blog-api.http` in VS Code.
+4. Click **Send Request** above any request, starting with:
+   - `GET {{baseUrl}}/health`
+
+Notes:
+- `@baseUrl` is defined at the top of the file (defaults to `http://localhost:5000`).
+- For requests like `GET /posts/1`, change the ID to an existing post.
+- For `GET /posts?term=tech`, change `term` to try different searches.
+
+---
+
 ## 🎨 Running the Frontend (Angular)
 
 ```bash
@@ -71,7 +91,6 @@ Frontend runs at **[http://localhost:4200](http://localhost:4200)**
 **DELETE /posts/:id** — Remove a post
 
 **GET /posts?term=...** — Search posts
-
 
 ---
 
